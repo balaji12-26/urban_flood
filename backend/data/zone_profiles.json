@@ -1,0 +1,56 @@
+[
+  {
+    "id": "velachery", "name": "Velachery",
+    "lat": 12.9816, "lon": 80.2209,
+    "notes": "Lake overflow zone, chronically low-lying",
+    "max_safe_rain_1h": 25.0, "max_safe_rain_6h": 80.0,
+    "flood_water_level_cm": 120.0, "baseline_water_level_cm": 45.0,
+    "drainage_capacity_0_1": 0.30, "terrain_risk_0_1": 0.80,
+    "historical_flood_freq_0_1": 0.90
+  },
+  {
+    "id": "adyar", "name": "Adyar",
+    "lat": 13.0012, "lon": 80.2565,
+    "notes": "Adyar River basin floodplain",
+    "max_safe_rain_1h": 28.0, "max_safe_rain_6h": 90.0,
+    "flood_water_level_cm": 110.0, "baseline_water_level_cm": 40.0,
+    "drainage_capacity_0_1": 0.45, "terrain_risk_0_1": 0.75,
+    "historical_flood_freq_0_1": 0.85
+  },
+  {
+    "id": "tnagar", "name": "T. Nagar",
+    "lat": 13.0418, "lon": 80.2341,
+    "notes": "Dense urban core, insufficient storm drains",
+    "max_safe_rain_1h": 20.0, "max_safe_rain_6h": 65.0,
+    "flood_water_level_cm": 100.0, "baseline_water_level_cm": 30.0,
+    "drainage_capacity_0_1": 0.25, "terrain_risk_0_1": 0.55,
+    "historical_flood_freq_0_1": 0.70
+  },
+  {
+    "id": "tambaram", "name": "Tambaram",
+    "lat": 12.9249, "lon": 80.1000,
+    "notes": "Suburban, mixed drainage quality",
+    "max_safe_rain_1h": 35.0, "max_safe_rain_6h": 110.0,
+    "flood_water_level_cm": 90.0, "baseline_water_level_cm": 20.0,
+    "drainage_capacity_0_1": 0.60, "terrain_risk_0_1": 0.40,
+    "historical_flood_freq_0_1": 0.45
+  },
+  {
+    "id": "guindy", "name": "Guindy",
+    "lat": 13.0067, "lon": 80.2206,
+    "notes": "Industrial zone, relatively higher elevation",
+    "max_safe_rain_1h": 38.0, "max_safe_rain_6h": 120.0,
+    "flood_water_level_cm": 85.0, "baseline_water_level_cm": 15.0,
+    "drainage_capacity_0_1": 0.70, "terrain_risk_0_1": 0.30,
+    "historical_flood_freq_0_1": 0.30
+  },
+  {
+    "id": "sholinganallur", "name": "Sholinganallur",
+    "lat": 12.9010, "lon": 80.2279,
+    "notes": "IT corridor, Sholinganallur lake adjacency",
+    "max_safe_rain_1h": 30.0, "max_safe_rain_6h": 95.0,
+    "flood_water_level_cm": 100.0, "baseline_water_level_cm": 35.0,
+    "drainage_capacity_0_1": 0.40, "terrain_risk_0_1": 0.60,
+    "historical_flood_freq_0_1": 0.65
+  }
+]

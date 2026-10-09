@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FloodSense Chennai</title>
+  <meta name="description" content="Relative Flood Risk Index explorer for six Chennai zones — transparent weighted formula, scenario simulator, validation panel.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div>
+      <h1>FloodSense <span class="brand-city">Chennai</span></h1>
+      <p class="brand-sub">Relative Flood Risk Index (0–100) · scenario explorer · not a prediction</p>
+    </div>
+  </div>
+  <div class="status-pills" id="status-pills">
+    <span class="pill pill-muted" id="pill-weather" title="Rainfall source">Weather: loading…</span>
+    <span class="pill pill-sim" id="pill-sensor" title="Water level is a synthetic sensor — no real device">SIMULATED water level</span>
+    <span class="pill pill-muted" id="pill-updated">—</span>
+  </div>
+  <div class="topbar-actions">
+    <label class="switch" title="Freeze the simulated sensor for stable numbers">
+      <input type="checkbox" id="toggle-frozen">
+      <span>Freeze sensor</span>
+    </label>
+    <label class="switch" title="Use Open-Meteo live data (off = cache / offline fallback)">
+      <input type="checkbox" id="toggle-live" checked>
+      <span>Live weather</span>
+    </label>
+    <label class="switch" title="Replace live rainfall with a labelled sample storm so the rainfall lever has something to scale">
+      <input type="checkbox" id="toggle-sample">
+      <span>Sample storm</span>
+    </label>
+    <button class="btn" id="btn-refresh">Refresh</button>
+  </div>
+</header>
+
+<div class="banner banner-warn hidden" id="banner-stale" role="status"></div>
+<div class="banner banner-error hidden" id="banner-error" role="alert"></div>
+
+<main class="layout">
+  <!-- ───────── Panel 1: Map + zone ranking ───────── -->
+  <section class="col col-left">
+    <div class="card card-map">
+      <div class="card-head">
+        <h2>Zone map</h2>
+        <div class="legend" id="legend">
+          <span><i class="sw sw-low"></i>Low &lt;30</span>
+          <span><i class="sw sw-moderate"></i>Moderate 30–54</span>
+          <span><i class="sw sw-high"></i>High 55–74</span>
+          <span><i class="sw sw-critical"></i>Critical ≥75</span>
+        </div>
+      </div>
+      <div id="map" aria-label="Map of Chennai zones"></div>
+      <p class="fineprint">Zone boundaries: <strong>approximate demonstration polygons</strong>. Not administrative wards or hydrological catchments.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>Zone ranking</h2>
+        <span class="hint">click a row to explain</span>
+      </div>
+      <ol class="zone-list" id="zone-list"></ol>
+    </div>
+  </section>
+
+  <!-- ───────── Right column: tabbed panels 2–5 ───────── -->
+  <section class="col col-right">
+    <nav class="tabs" id="tabs" role="tablist">
+      <button class="tab active" data-tab="explain" role="tab">Zone explainer</button>
+      <button class="tab" data-tab="simulator" role="tab">Scenario simulator</button>
+      <button class="tab" data-tab="validation" role="tab">Validation</button>
+      <button class="tab" data-tab="methods" role="tab">Methods &amp; limitations</button>
+    </nav>
+
+    <!-- Panel 2: Zone explainer + alert -->
+    <div class="panel active" id="panel-explain" role="tabpanel">
+      <div class="card" id="zone-panel">
+        <p class="placeholder">Loading zones…</p>
+      </div>
+      <div class="card" id="alert-panel"></div>
+    </div>
+
+    <!-- Panel 3: Scenario simulator -->
+    <div class="panel" id="panel-simulator" role="tabpanel">
+      <div class="card">
+        <div class="card-head">
+          <h2>Scenario simulator</h2>
+          <div class="seg" id="sim-scope">
+            <button class="seg-btn active" data-scope="zone">Selected zone</button>
+            <button class="seg-btn" data-scope="all">All zones</button>
+          </div>
+        </div>
+        <p class="muted small">Overrides are <strong>local</strong>: a scenario applied to one zone never changes another. Drag a slider; the engine re-scores instantly.</p>
+        <p class="small hidden" id="sim-dry-hint" style="color:#ffd98a">Live rainfall is 0.0 mm/h right now, so the rainfall multiplier has nothing to scale (0 × n = 0). Turn on <strong>Sample storm</strong> in the top bar, or use the drainage / water-level levers.</p>
+
+        <div class="sliders">
+          <div class="slider">
+            <div class="slider-top"><label for="sl-rain">Rainfall multiplier</label><output id="out-rain">1.0×</output></div>
+            <input type="range" id="sl-rain" min="0" max="4" step="0.1" value="1">
+            <div class="slider-scale"><span>0×</span><span>2×</span><span>4×</span></div>
+          </div>
+          <div class="slider">
+            <div class="slider-top"><label for="sl-drain">Drainage blockage</label><output id="out-drain">0%</output></div>
+            <input type="range" id="sl-drain" min="0" max="1" step="0.05" value="0">
+            <div class="slider-scale"><span>0%</span><span>50%</span><span>100%</span></div>
+          </div>
+          <div class="slider">
+            <div class="slider-top"><label for="sl-wl">Water-level rise <span class="badge badge-sim">SIMULATED</span></label><output id="out-wl">+0 cm</output></div>
+            <input type="range" id="sl-wl" min="0" max="150" step="5" value="0">
+            <div class="slider-scale"><span>0</span><span>75 cm</span><span>150 cm</span></div>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button class="btn btn-ghost" id="btn-sim-reset">Reset</button>
+          <div class="presets">
+            <button class="btn btn-ghost btn-xs" data-preset="cloudburst">Cloudburst 2.5×</button>
+            <button class="btn btn-ghost btn-xs" data-preset="blocked">Drains 70% blocked</button>
+            <button class="btn btn-ghost btn-xs" data-preset="lake">Lake overflow +60 cm</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Before → after</h2><span class="hint" id="sim-status"></span></div>
+        <table class="table" id="sim-table">
+          <thead><tr><th>Zone</th><th>Baseline</th><th>Scenario</th><th>Δ</th><th>Level</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>Next 6 hours (projection)</h2><span class="badge badge-fc">FORECAST</span></div>
+        <div class="chart-wrap"><canvas id="chart-curve"></canvas></div>
+        <p class="fineprint">Sliding-window projection of the index using Open-Meteo hourly forecast and the simulated sensor. Scenario exploration only.</p>
+      </div>
+    </div>
+
+    <!-- Panel 4: Validation (never cut) -->
+    <div class="panel" id="panel-validation" role="tabpanel">
+      <div class="card">
+        <div class="card-head">
+          <h2>Validation</h2>
+          <button class="btn btn-ghost btn-xs" id="btn-validate">Run checks</button>
+        </div>
+        <p class="muted small">Every check runs live against the same pure engine that scores the map. Nothing here is pre-computed.</p>
+        <div id="validation-summary" class="val-summary"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>1 · Monotonicity</h2><span class="hint" id="val-mono-status"></span></div>
+        <p class="muted small">More rain, more blockage, or a higher water level must never lower a zone's index.</p>
+        <div id="val-monotone"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>2 · Weight sensitivity</h2><span class="hint" id="val-sens-status"></span></div>
+        <p class="muted small">Each weight nudged ±0.10 and k swept. Does the zone ranking survive?</p>
+        <div class="chart-wrap chart-wrap-sm"><canvas id="chart-sens"></canvas></div>
+        <div id="val-sensitivity"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>3 · Baseline comparison</h2><span class="hint" id="val-base-status"></span></div>
+        <p class="muted small">Full model vs rainfall-only, static-only and equal-weight baselines.</p>
+        <div class="chart-wrap chart-wrap-sm"><canvas id="chart-baseline"></canvas></div>
+        <div id="val-baseline"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2>4 · Historical replay</h2>
+          <div class="inline-form">
+            <input type="date" id="replay-date" value="2015-12-01" min="1950-01-01">
+            <button class="btn btn-ghost btn-xs" id="btn-replay">Replay</button>
+          </div>
+        </div>
+        <div class="banner banner-replay" id="replay-banner"></div>
+        <div class="chart-wrap"><canvas id="chart-replay"></canvas></div>
+        <div id="val-replay"></div>
+      </div>
+    </div>
+
+    <!-- Panel 5: Methods & limitations -->
+    <div class="panel" id="panel-methods" role="tabpanel">
+      <div class="card">
+        <div class="card-head"><h2>Methods &amp; limitations</h2></div>
+        <pre class="methods" id="methods-text">Loading…</pre>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Data provenance</h2></div>
+        <div class="prov-grid" id="prov-grid"></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>Engine constants</h2></div>
+        <div id="methods-constants" class="kv"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  FloodSense · hackathon prototype · Relative Flood Risk Index is a transparent weighted score, not a flood probability.
+  Prototype recommendations are not official emergency guidance — follow IMD / NDMA / Greater Chennai Corporation.
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/map.js"></script>
+<script src="js/zone-panel.js"></script>
+<script src="js/alerts.js"></script>
+<script src="js/simulator.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/methods.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => FS.boot());
+</script>
+</body>
+</html>

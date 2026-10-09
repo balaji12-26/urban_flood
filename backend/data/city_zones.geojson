@@ -1,0 +1,324 @@
+{
+ "type": "FeatureCollection",
+ "_disclaimer": "Approximate demonstration polygons (about +/-0.011 deg around each zone centroid). Not administrative wards or hydrological catchments.",
+ "features": [
+  {
+   "type": "Feature",
+   "id": "velachery",
+   "properties": {
+    "id": "velachery",
+    "name": "Velachery",
+    "notes": "Lake overflow zone, chronically low-lying",
+    "approximate": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       80.23219,
+       12.9816
+      ],
+      [
+       80.22684,
+       12.98739
+      ],
+      [
+       80.2209,
+       12.99095
+      ],
+      [
+       80.21327,
+       12.98904
+      ],
+      [
+       80.213,
+       12.9816
+      ],
+      [
+       80.21327,
+       12.97416
+      ],
+      [
+       80.2209,
+       12.97225
+      ],
+      [
+       80.22684,
+       12.97581
+      ],
+      [
+       80.23219,
+       12.9816
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "adyar",
+   "properties": {
+    "id": "adyar",
+    "name": "Adyar",
+    "notes": "Adyar River basin floodplain",
+    "approximate": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       80.26514,
+       13.00381
+      ],
+      [
+       80.26063,
+       13.00883
+      ],
+      [
+       80.25319,
+       13.01162
+      ],
+      [
+       80.24936,
+       13.00487
+      ],
+      [
+       80.24681,
+       12.99828
+      ],
+      [
+       80.25167,
+       12.99229
+      ],
+      [
+       80.25886,
+       12.99376
+      ],
+      [
+       80.26633,
+       12.99615
+      ],
+      [
+       80.26514,
+       13.00381
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "tnagar",
+   "properties": {
+    "id": "tnagar",
+    "name": "T. Nagar",
+    "notes": "Dense urban core, insufficient storm drains",
+    "approximate": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       80.24092,
+       13.04634
+      ],
+      [
+       80.23618,
+       13.0526
+      ],
+      [
+       80.22927,
+       13.04868
+      ],
+      [
+       80.22488,
+       13.04349
+      ],
+      [
+       80.22507,
+       13.03578
+      ],
+      [
+       80.23264,
+       13.03422
+      ],
+      [
+       80.2401,
+       13.03325
+      ],
+      [
+       80.24374,
+       13.04004
+      ],
+      [
+       80.24092,
+       13.04634
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "tambaram",
+   "properties": {
+    "id": "tambaram",
+    "name": "Tambaram",
+    "notes": "Suburban, mixed drainage quality",
+    "approximate": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       80.10684,
+       12.9333
+      ],
+      [
+       80.09894,
+       12.93386
+      ],
+      [
+       80.09322,
+       12.93015
+      ],
+      [
+       80.08882,
+       12.92365
+      ],
+      [
+       80.09492,
+       12.91865
+      ],
+      [
+       80.10114,
+       12.91528
+      ],
+      [
+       80.10824,
+       12.91852
+      ],
+      [
+       80.10788,
+       12.92578
+      ],
+      [
+       80.10684,
+       12.9333
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "guindy",
+   "properties": {
+    "id": "guindy",
+    "name": "Guindy",
+    "notes": "Industrial zone, relatively higher elevation",
+    "approximate": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       80.22423,
+       13.0158
+      ],
+      [
+       80.21732,
+       13.01396
+      ],
+      [
+       80.21013,
+       13.01067
+      ],
+      [
+       80.2126,
+       13.00327
+      ],
+      [
+       80.21728,
+       12.99837
+      ],
+      [
+       80.22505,
+       12.99684
+      ],
+      [
+       80.22802,
+       13.00389
+      ],
+      [
+       80.23017,
+       13.0108
+      ],
+      [
+       80.22423,
+       13.0158
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "id": "sholinganallur",
+   "properties": {
+    "id": "sholinganallur",
+    "name": "Sholinganallur",
+    "notes": "IT corridor, Sholinganallur lake adjacency",
+    "approximate": true
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       80.22846,
+       12.90869
+      ],
+      [
+       80.22077,
+       12.90901
+      ],
+      [
+       80.21846,
+       12.90165
+      ],
+      [
+       80.22149,
+       12.89558
+      ],
+      [
+       80.2271,
+       12.89003
+      ],
+      [
+       80.23334,
+       12.89488
+      ],
+      [
+       80.23759,
+       12.90033
+      ],
+      [
+       80.23598,
+       12.90783
+      ],
+      [
+       80.22846,
+       12.90869
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

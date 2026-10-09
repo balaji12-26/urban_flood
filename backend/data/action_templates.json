@@ -1,0 +1,23 @@
+{
+  "_disclaimer": "Prototype recommendation — not official emergency guidance. Pre-authored text keyed by <RISK_LEVEL>_<top_dynamic_factor>.",
+
+  "LOW_rainfall": "Light or no rainfall. Conditions within normal range for this zone. Routine monitoring only.",
+  "LOW_forecast": "Dry now; forecast rainfall is minor. No action needed. Check back if the forecast strengthens.",
+  "LOW_water_level": "Simulated water level is near baseline. No action needed. (Water level is a SIMULATED input.)",
+  "LOW_default": "Conditions within normal range. No action needed; routine monitoring only.",
+
+  "MODERATE_rainfall": "Current rainfall is the main driver. Monitor local drains, clear household outlets, and avoid parking in known low spots.",
+  "MODERATE_forecast": "Forecast rainfall over the next 6 hours is the main driver. Plan travel before the rain window; keep devices charged.",
+  "MODERATE_water_level": "Simulated water level is elevated above baseline. Watch lake and canal margins; avoid underpasses. (SIMULATED input.)",
+  "MODERATE_default": "Monitor conditions. Review local drain status and follow IMD bulletins.",
+
+  "HIGH_rainfall": "Heavy current rainfall relative to this zone's safe limit. Move vehicles to higher ground, avoid low-lying roads and subways, and secure ground-floor belongings.",
+  "HIGH_forecast": "Significant rainfall forecast within 6 hours. Complete essential travel now; prepare sandbags or barriers for ground-floor entrances in known low spots.",
+  "HIGH_water_level": "Simulated water level approaching the zone flood mark. Residents near lakes, canals and the river should prepare to move valuables upstairs. (SIMULATED input.)",
+  "HIGH_default": "Elevated relative risk. Avoid low-lying roads, move vehicles to higher ground, and prepare for possible waterlogging.",
+
+  "CRITICAL_rainfall": "Extreme current rainfall for this zone. Avoid all non-essential travel; do not drive through standing water. Follow Greater Chennai Corporation and NDMA/IMD advisories.",
+  "CRITICAL_forecast": "Extreme rainfall forecast within 6 hours. Relocate from known flood-prone ground floors ahead of the rain window if local authorities advise; keep emergency contacts ready.",
+  "CRITICAL_water_level": "Simulated water level at or above the zone flood mark. Treat lake, canal and river margins as hazardous; follow official evacuation guidance if issued. (SIMULATED input.)",
+  "CRITICAL_default": "Very high relative risk. Avoid travel through this zone; follow instructions from Greater Chennai Corporation and NDMA/IMD advisories."
+}

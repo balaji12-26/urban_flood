@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/data/cache/*.json
+.claude/
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+
+# hackathon problem-statement handouts (not project code)
+CLIMATE TECHNOLOGY Software - 10 PROBLEM STATEMENTS.md
+Climate Technology Hardware - 10 Problem Statements.md
+Cybersecurity_Problem_Statements.md
+Quantum Problem Statements - 24 Hours Hackathon-Kriyova-Confidential.md

@@ -1,0 +1,596 @@
+{
+  "label": "Relative Flood Risk Index (0–100)",
+  "city": "Chennai",
+  "generated_at": 1791568040.001867,
+  "weather": {
+    "precip_1h_mm": 4.2,
+    "forecast_6h_mm": [
+      3.1,
+      5.6,
+      7.9,
+      6.2,
+      3.4,
+      1.8
+    ],
+    "observation_time": null,
+    "timezone": "Asia/Kolkata",
+    "source": "offline-fallback",
+    "stale": true,
+    "age_seconds": null,
+    "fetched_at": 1791568040.0005555,
+    "lat": 13.0827,
+    "lon": 80.2707,
+    "provider": "offline-fallback",
+    "error": "live=False and no cache; serving labelled offline fallback"
+  },
+  "sensor": {
+    "label": "SIMULATED",
+    "mode": "frozen",
+    "seed": 42,
+    "bucket_seconds": 30,
+    "note": "Synthetic water-level sensor. No real device. Noise is deterministic per (seed, zone, 30s bucket)."
+  },
+  "model": {
+    "weights": {
+      "rainfall": 0.3,
+      "forecast": 0.2,
+      "water_level": 0.2,
+      "drainage": 0.15,
+      "terrain": 0.1,
+      "history": 0.05
+    },
+    "k": 0.7,
+    "thresholds": {
+      "MODERATE": 30,
+      "HIGH": 55,
+      "CRITICAL": 75
+    },
+    "data_labels": {
+      "rainfall": "LIVE",
+      "forecast": "FORECAST",
+      "water_level": "SIMULATED",
+      "drainage": "PROFILE",
+      "terrain": "DERIVED",
+      "history": "PROFILE"
+    }
+  },
+  "disclaimer": "Relative Flood Risk Index (0–100). Not a probability. Not a validated prediction. For scenario exploration and zone comparison only.",
+  "boundary_disclaimer": "Approximate demonstration polygons. Not administrative wards or hydrological catchments.",
+  "zones": [
+    {
+      "id": "velachery",
+      "name": "Velachery",
+      "lat": 12.9816,
+      "lon": 80.2209,
+      "notes": "Lake overflow zone, chronically low-lying",
+      "profile": {
+        "max_safe_rain_1h": 25.0,
+        "max_safe_rain_6h": 80.0,
+        "flood_water_level_cm": 120.0,
+        "baseline_water_level_cm": 45.0,
+        "drainage_capacity_0_1": 0.3,
+        "terrain_risk_0_1": 0.8,
+        "historical_flood_freq_0_1": 0.9
+      },
+      "observations": {
+        "precip_1h_mm": 4.2,
+        "forecast_6h_mm": [
+          3.1,
+          5.6,
+          7.9,
+          6.2,
+          3.4,
+          1.8
+        ],
+        "forecast_6h_total_mm": 28.0,
+        "water_level_cm": 45.0
+      },
+      "quality_flags": {},
+      "scenario_applied": {},
+      "risk": {
+        "zone_id": "velachery",
+        "index": 45.5,
+        "risk_level": "MODERATE",
+        "top_driver": "drainage",
+        "top_dynamic": "water_level",
+        "top_static": "drainage",
+        "factor_raws": {
+          "rainfall": 0.168,
+          "forecast": 0.35,
+          "water_level": 0.375,
+          "drainage": 0.7,
+          "terrain": 0.8,
+          "history": 0.9
+        },
+        "contributions": {
+          "rainfall": 0.0504,
+          "forecast": 0.07,
+          "water_level": 0.075,
+          "drainage": 0.105,
+          "terrain": 0.08,
+          "history": 0.045
+        },
+        "weighted_sum": 0.4254,
+        "data_labels": {
+          "rainfall": "LIVE",
+          "forecast": "FORECAST",
+          "water_level": "SIMULATED",
+          "drainage": "PROFILE",
+          "terrain": "DERIVED",
+          "history": "PROFILE"
+        },
+        "weights_used": {
+          "rainfall": 0.3,
+          "forecast": 0.2,
+          "water_level": 0.2,
+          "drainage": 0.15,
+          "terrain": 0.1,
+          "history": 0.05
+        },
+        "k_used": 0.7
+      },
+      "water_level_views": {
+        "with_water_level": 45.5,
+        "without_water_level": 39.4,
+        "wl_contribution": 0.075,
+        "note": "without_water_level drops the factor entirely (no renormalization). Difference is the true water-level contribution to the index."
+      },
+      "action": {
+        "text": "Simulated water level is elevated above baseline. Watch lake and canal margins; avoid underpasses. (SIMULATED input.)",
+        "disclaimer": "Prototype recommendation — not official emergency guidance.",
+        "based_on": {
+          "risk_level": "MODERATE",
+          "top_dynamic": "water_level",
+          "template_key": "MODERATE_water_level"
+        }
+      },
+      "rank": 1
+    },
+    {
+      "id": "tnagar",
+      "name": "T. Nagar",
+      "lat": 13.0418,
+      "lon": 80.2341,
+      "notes": "Dense urban core, insufficient storm drains",
+      "profile": {
+        "max_safe_rain_1h": 20.0,
+        "max_safe_rain_6h": 65.0,
+        "flood_water_level_cm": 100.0,
+        "baseline_water_level_cm": 30.0,
+        "drainage_capacity_0_1": 0.25,
+        "terrain_risk_0_1": 0.55,
+        "historical_flood_freq_0_1": 0.7
+      },
+      "observations": {
+        "precip_1h_mm": 4.2,
+        "forecast_6h_mm": [
+          3.1,
+          5.6,
+          7.9,
+          6.2,
+          3.4,
+          1.8
+        ],
+        "forecast_6h_total_mm": 28.0,
+        "water_level_cm": 30.0
+      },
+      "quality_flags": {},
+      "scenario_applied": {},
+      "risk": {
+        "zone_id": "tnagar",
+        "index": 44.5,
+        "risk_level": "MODERATE",
+        "top_driver": "drainage",
+        "top_dynamic": "forecast",
+        "top_static": "drainage",
+        "factor_raws": {
+          "rainfall": 0.21,
+          "forecast": 0.431,
+          "water_level": 0.3,
+          "drainage": 0.75,
+          "terrain": 0.55,
+          "history": 0.7
+        },
+        "contributions": {
+          "rainfall": 0.063,
+          "forecast": 0.0862,
+          "water_level": 0.06,
+          "drainage": 0.1125,
+          "terrain": 0.055,
+          "history": 0.035
+        },
+        "weighted_sum": 0.4117,
+        "data_labels": {
+          "rainfall": "LIVE",
+          "forecast": "FORECAST",
+          "water_level": "SIMULATED",
+          "drainage": "PROFILE",
+          "terrain": "DERIVED",
+          "history": "PROFILE"
+        },
+        "weights_used": {
+          "rainfall": 0.3,
+          "forecast": 0.2,
+          "water_level": 0.2,
+          "drainage": 0.15,
+          "terrain": 0.1,
+          "history": 0.05
+        },
+        "k_used": 0.7
+      },
+      "water_level_views": {
+        "with_water_level": 44.5,
+        "without_water_level": 39.5,
+        "wl_contribution": 0.06,
+        "note": "without_water_level drops the factor entirely (no renormalization). Difference is the true water-level contribution to the index."
+      },
+      "action": {
+        "text": "Forecast rainfall over the next 6 hours is the main driver. Plan travel before the rain window; keep devices charged.",
+        "disclaimer": "Prototype recommendation — not official emergency guidance.",
+        "based_on": {
+          "risk_level": "MODERATE",
+          "top_dynamic": "forecast",
+          "template_key": "MODERATE_forecast"
+        }
+      },
+      "rank": 2
+    },
+    {
+      "id": "adyar",
+      "name": "Adyar",
+      "lat": 13.0012,
+      "lon": 80.2565,
+      "notes": "Adyar River basin floodplain",
+      "profile": {
+        "max_safe_rain_1h": 28.0,
+        "max_safe_rain_6h": 90.0,
+        "flood_water_level_cm": 110.0,
+        "baseline_water_level_cm": 40.0,
+        "drainage_capacity_0_1": 0.45,
+        "terrain_risk_0_1": 0.75,
+        "historical_flood_freq_0_1": 0.85
+      },
+      "observations": {
+        "precip_1h_mm": 4.2,
+        "forecast_6h_mm": [
+          3.1,
+          5.6,
+          7.9,
+          6.2,
+          3.4,
+          1.8
+        ],
+        "forecast_6h_total_mm": 28.0,
+        "water_level_cm": 40.0
+      },
+      "quality_flags": {},
+      "scenario_applied": {},
+      "risk": {
+        "zone_id": "adyar",
+        "index": 41.9,
+        "risk_level": "MODERATE",
+        "top_driver": "drainage",
+        "top_dynamic": "water_level",
+        "top_static": "drainage",
+        "factor_raws": {
+          "rainfall": 0.15,
+          "forecast": 0.311,
+          "water_level": 0.364,
+          "drainage": 0.55,
+          "terrain": 0.75,
+          "history": 0.85
+        },
+        "contributions": {
+          "rainfall": 0.045,
+          "forecast": 0.0622,
+          "water_level": 0.0727,
+          "drainage": 0.0825,
+          "terrain": 0.075,
+          "history": 0.0425
+        },
+        "weighted_sum": 0.3799,
+        "data_labels": {
+          "rainfall": "LIVE",
+          "forecast": "FORECAST",
+          "water_level": "SIMULATED",
+          "drainage": "PROFILE",
+          "terrain": "DERIVED",
+          "history": "PROFILE"
+        },
+        "weights_used": {
+          "rainfall": 0.3,
+          "forecast": 0.2,
+          "water_level": 0.2,
+          "drainage": 0.15,
+          "terrain": 0.1,
+          "history": 0.05
+        },
+        "k_used": 0.7
+      },
+      "water_level_views": {
+        "with_water_level": 41.9,
+        "without_water_level": 35.5,
+        "wl_contribution": 0.0727,
+        "note": "without_water_level drops the factor entirely (no renormalization). Difference is the true water-level contribution to the index."
+      },
+      "action": {
+        "text": "Simulated water level is elevated above baseline. Watch lake and canal margins; avoid underpasses. (SIMULATED input.)",
+        "disclaimer": "Prototype recommendation — not official emergency guidance.",
+        "based_on": {
+          "risk_level": "MODERATE",
+          "top_dynamic": "water_level",
+          "template_key": "MODERATE_water_level"
+        }
+      },
+      "rank": 3
+    },
+    {
+      "id": "sholinganallur",
+      "name": "Sholinganallur",
+      "lat": 12.901,
+      "lon": 80.2279,
+      "notes": "IT corridor, Sholinganallur lake adjacency",
+      "profile": {
+        "max_safe_rain_1h": 30.0,
+        "max_safe_rain_6h": 95.0,
+        "flood_water_level_cm": 100.0,
+        "baseline_water_level_cm": 35.0,
+        "drainage_capacity_0_1": 0.4,
+        "terrain_risk_0_1": 0.6,
+        "historical_flood_freq_0_1": 0.65
+      },
+      "observations": {
+        "precip_1h_mm": 4.2,
+        "forecast_6h_mm": [
+          3.1,
+          5.6,
+          7.9,
+          6.2,
+          3.4,
+          1.8
+        ],
+        "forecast_6h_total_mm": 28.0,
+        "water_level_cm": 35.0
+      },
+      "quality_flags": {},
+      "scenario_applied": {},
+      "risk": {
+        "zone_id": "sholinganallur",
+        "index": 39.6,
+        "risk_level": "MODERATE",
+        "top_driver": "drainage",
+        "top_dynamic": "water_level",
+        "top_static": "drainage",
+        "factor_raws": {
+          "rainfall": 0.14,
+          "forecast": 0.295,
+          "water_level": 0.35,
+          "drainage": 0.6,
+          "terrain": 0.6,
+          "history": 0.65
+        },
+        "contributions": {
+          "rainfall": 0.042,
+          "forecast": 0.0589,
+          "water_level": 0.07,
+          "drainage": 0.09,
+          "terrain": 0.06,
+          "history": 0.0325
+        },
+        "weighted_sum": 0.3534,
+        "data_labels": {
+          "rainfall": "LIVE",
+          "forecast": "FORECAST",
+          "water_level": "SIMULATED",
+          "drainage": "PROFILE",
+          "terrain": "DERIVED",
+          "history": "PROFILE"
+        },
+        "weights_used": {
+          "rainfall": 0.3,
+          "forecast": 0.2,
+          "water_level": 0.2,
+          "drainage": 0.15,
+          "terrain": 0.1,
+          "history": 0.05
+        },
+        "k_used": 0.7
+      },
+      "water_level_views": {
+        "with_water_level": 39.6,
+        "without_water_level": 33.3,
+        "wl_contribution": 0.07,
+        "note": "without_water_level drops the factor entirely (no renormalization). Difference is the true water-level contribution to the index."
+      },
+      "action": {
+        "text": "Simulated water level is elevated above baseline. Watch lake and canal margins; avoid underpasses. (SIMULATED input.)",
+        "disclaimer": "Prototype recommendation — not official emergency guidance.",
+        "based_on": {
+          "risk_level": "MODERATE",
+          "top_dynamic": "water_level",
+          "template_key": "MODERATE_water_level"
+        }
+      },
+      "rank": 4
+    },
+    {
+      "id": "tambaram",
+      "name": "Tambaram",
+      "lat": 12.9249,
+      "lon": 80.1,
+      "notes": "Suburban, mixed drainage quality",
+      "profile": {
+        "max_safe_rain_1h": 35.0,
+        "max_safe_rain_6h": 110.0,
+        "flood_water_level_cm": 90.0,
+        "baseline_water_level_cm": 20.0,
+        "drainage_capacity_0_1": 0.6,
+        "terrain_risk_0_1": 0.4,
+        "historical_flood_freq_0_1": 0.45
+      },
+      "observations": {
+        "precip_1h_mm": 4.2,
+        "forecast_6h_mm": [
+          3.1,
+          5.6,
+          7.9,
+          6.2,
+          3.4,
+          1.8
+        ],
+        "forecast_6h_total_mm": 28.0,
+        "water_level_cm": 20.0
+      },
+      "quality_flags": {},
+      "scenario_applied": {},
+      "risk": {
+        "zone_id": "tambaram",
+        "index": 30.4,
+        "risk_level": "MODERATE",
+        "top_driver": "drainage",
+        "top_dynamic": "forecast",
+        "top_static": "drainage",
+        "factor_raws": {
+          "rainfall": 0.12,
+          "forecast": 0.255,
+          "water_level": 0.222,
+          "drainage": 0.4,
+          "terrain": 0.4,
+          "history": 0.45
+        },
+        "contributions": {
+          "rainfall": 0.036,
+          "forecast": 0.0509,
+          "water_level": 0.0444,
+          "drainage": 0.06,
+          "terrain": 0.04,
+          "history": 0.0225
+        },
+        "weighted_sum": 0.2539,
+        "data_labels": {
+          "rainfall": "LIVE",
+          "forecast": "FORECAST",
+          "water_level": "SIMULATED",
+          "drainage": "PROFILE",
+          "terrain": "DERIVED",
+          "history": "PROFILE"
+        },
+        "weights_used": {
+          "rainfall": 0.3,
+          "forecast": 0.2,
+          "water_level": 0.2,
+          "drainage": 0.15,
+          "terrain": 0.1,
+          "history": 0.05
+        },
+        "k_used": 0.7
+      },
+      "water_level_views": {
+        "with_water_level": 30.4,
+        "without_water_level": 25.9,
+        "wl_contribution": 0.0444,
+        "note": "without_water_level drops the factor entirely (no renormalization). Difference is the true water-level contribution to the index."
+      },
+      "action": {
+        "text": "Forecast rainfall over the next 6 hours is the main driver. Plan travel before the rain window; keep devices charged.",
+        "disclaimer": "Prototype recommendation — not official emergency guidance.",
+        "based_on": {
+          "risk_level": "MODERATE",
+          "top_dynamic": "forecast",
+          "template_key": "MODERATE_forecast"
+        }
+      },
+      "rank": 5
+    },
+    {
+      "id": "guindy",
+      "name": "Guindy",
+      "lat": 13.0067,
+      "lon": 80.2206,
+      "notes": "Industrial zone, relatively higher elevation",
+      "profile": {
+        "max_safe_rain_1h": 38.0,
+        "max_safe_rain_6h": 120.0,
+        "flood_water_level_cm": 85.0,
+        "baseline_water_level_cm": 15.0,
+        "drainage_capacity_0_1": 0.7,
+        "terrain_risk_0_1": 0.3,
+        "historical_flood_freq_0_1": 0.3
+      },
+      "observations": {
+        "precip_1h_mm": 4.2,
+        "forecast_6h_mm": [
+          3.1,
+          5.6,
+          7.9,
+          6.2,
+          3.4,
+          1.8
+        ],
+        "forecast_6h_total_mm": 28.0,
+        "water_level_cm": 15.0
+      },
+      "quality_flags": {},
+      "scenario_applied": {},
+      "risk": {
+        "zone_id": "guindy",
+        "index": 25.4,
+        "risk_level": "LOW",
+        "top_driver": "forecast",
+        "top_dynamic": "forecast",
+        "top_static": "drainage",
+        "factor_raws": {
+          "rainfall": 0.111,
+          "forecast": 0.233,
+          "water_level": 0.176,
+          "drainage": 0.3,
+          "terrain": 0.3,
+          "history": 0.3
+        },
+        "contributions": {
+          "rainfall": 0.0332,
+          "forecast": 0.0467,
+          "water_level": 0.0353,
+          "drainage": 0.045,
+          "terrain": 0.03,
+          "history": 0.015
+        },
+        "weighted_sum": 0.2051,
+        "data_labels": {
+          "rainfall": "LIVE",
+          "forecast": "FORECAST",
+          "water_level": "SIMULATED",
+          "drainage": "PROFILE",
+          "terrain": "DERIVED",
+          "history": "PROFILE"
+        },
+        "weights_used": {
+          "rainfall": 0.3,
+          "forecast": 0.2,
+          "water_level": 0.2,
+          "drainage": 0.15,
+          "terrain": 0.1,
+          "history": 0.05
+        },
+        "k_used": 0.7
+      },
+      "water_level_views": {
+        "with_water_level": 25.4,
+        "without_water_level": 21.5,
+        "wl_contribution": 0.0353,
+        "note": "without_water_level drops the factor entirely (no renormalization). Difference is the true water-level contribution to the index."
+      },
+      "action": {
+        "text": "Dry now; forecast rainfall is minor. No action needed. Check back if the forecast strengthens.",
+        "disclaimer": "Prototype recommendation — not official emergency guidance.",
+        "based_on": {
+          "risk_level": "LOW",
+          "top_dynamic": "forecast",
+          "template_key": "LOW_forecast"
+        }
+      },
+      "rank": 6
+    }
+  ],
+  "_mock_note": "Generated by the real engine via GET /api/zones?live=0&sensor_mode=frozen. Schema identical to the live endpoint. Weather is the labelled offline fallback."
+}
